@@ -2,11 +2,11 @@ import { BreadcrumbComponent } from "@/components/BreadcrumComponent";
 import React from "react";
 import ProfileComponent from "./ProfileComponent";
 
-function HeaderComponent() {
+function HeaderComponent({ workspaceId }) {
   return (
     <>
       <section className="w-full flex justify-between items-center">
-        <BreadcrumbComponent />
+        <BreadcrumbComponent workspaceId={workspaceId} />
         <ProfileComponent />
       </section>
     </>

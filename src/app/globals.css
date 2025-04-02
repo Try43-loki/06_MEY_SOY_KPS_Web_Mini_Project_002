@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 @theme inline {
   --drop-shadow-light-steel-blue: 0 0 10px var(--light-steel-blue-10);
   /* custom colors */

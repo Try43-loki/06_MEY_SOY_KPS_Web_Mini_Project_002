@@ -1,6 +1,4 @@
 import { DialogComponent } from "@/components/DialogComponent";
-import { Dialog } from "@radix-ui/react-dialog";
-import { PlusSquare } from "lucide-react";
 import React from "react";
 
 function AddTaskComponent() {

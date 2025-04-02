@@ -10,54 +10,64 @@ import {
 import { Clock, Ellipsis } from "lucide-react";
 import React, { useState } from "react";
 
-export default function CardComponent() {
-  const [selectedValue, setSelectedValue] = useState("NOT_STARTED");
+export default function CardComponent({ item }) {
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleDateString("en-US", {
+      month: "short", // Apr
+      day: "2-digit", // 04
+      year: "numeric", // 2025
+    });
+  };
+  const [selectedValue, setSelectedValue] = useState("");
 
   return (
     <div className="border border-gray-300 rounded-xl mt-8">
       <div className="p-5">
         <div className="flex justify-between">
-          <h2 className="text-xl font-bold capitalize">HRD Design</h2>
+          <h2 className="text-xl font-bold capitalize">{item.taskTitle}</h2>
           <Ellipsis />
         </div>
 
         {/* task detials */}
         <p className="line-clamp-2 text-light-steel-blue my-2 h-12">
-          Description
+          {item.taskDetails}
         </p>
 
         <div className="flex justify-between items-center mt-4">
           {/* tag */}
           <p className="bg-purple-100 text-purple-500 py-1.5 px-3 rounded-lg">
-            DESIGN
+            {item.tag}
           </p>
 
           {/* status */}
           <div
             className={`h-8 w-8 rounded-full ${
-              selectedValue === "NOT_STARTED"
+              item.status === "NOT_STARTED"
                 ? "bg-watermelon-red "
-                : selectedValue === "FINISHED"
+                : item.status === "FINISHED"
                 ? "bg-persian-green "
                 : "bg-royal-blue"
             } `}
-          ></div>
+          >
+            {" "}
+          </div>
         </div>
       </div>
 
       {/* progress */}
       <div className="flex justify-between items-center border-t border-t-gray-300 p-5">
-        <Select value={selectedValue} onValueChange={setSelectedValue}>
+        <Select onValueChange={setSelectedValue}>
           <SelectTrigger
             className={
-              selectedValue === "NOT_STARTED"
+              item.status === "NOT_STARTED"
                 ? "text-watermelon-red border-watermelon-red"
-                : selectedValue === "FINISHED"
+                : item.status === "FINISHED"
                 ? "text-persian-green border-persian-green"
                 : "text-royal-blue border-royal-blue"
             }
           >
-            <SelectValue placeholder={"NOT_STARTED"} />
+            <SelectValue placeholder={item.status} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="NOT_STARTED">NOT_STARTED</SelectItem>
@@ -68,7 +78,7 @@ export default function CardComponent() {
 
         {/* date */}
         <p className="flex gap-3 text-light-steel-blue">
-          <Clock size={22} /> Mar 23, 2025
+          <Clock size={22} /> {formatDate(item.endDate)}
         </p>
       </div>
     </div>

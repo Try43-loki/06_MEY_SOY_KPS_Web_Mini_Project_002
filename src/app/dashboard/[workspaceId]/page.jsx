@@ -1,10 +1,14 @@
 import { Sidebar } from "lucide-react";
 import React from "react";
-import SidebarComponent from "./_components/SidebarComponent";
-import ContentComponent from "./_components/ContentComponent";
-import AddTaskComponent from "./_components/AddTaskComponent";
+import SidebarComponent from "../_components/SidebarComponent";
+import ContentComponent from "../_components/ContentComponent";
+import AddTaskComponent from "../_components/AddTaskComponent";
+import { getAllWorkspacesService } from "@/services/workspace.service";
 
-function WorkspaceDetailPage() {
+async function WorkspaceDetailPage({ params }) {
+  const workspace = await params;
+  const workspaceId = workspace.workspaceId;
+
   return (
     <>
       <section className="flex h-screen w-screen gap-8">
@@ -14,7 +18,7 @@ function WorkspaceDetailPage() {
         </aside>
         {/* content */}
         <section className=" grow h-screen relative">
-          <ContentComponent />
+          <ContentComponent workspaceId={workspaceId} />
           <div className="fixed bottom-10 right-14">
             {/* add task */}
             <AddTaskComponent />
