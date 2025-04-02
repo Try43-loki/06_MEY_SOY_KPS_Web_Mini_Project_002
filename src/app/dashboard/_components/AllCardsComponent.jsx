@@ -1,17 +1,19 @@
 import React from "react";
-import CardTaskComponent from "./CardTaskComponent";
+import NotStartedCardComponent from "./NotStartedCardComponent";
+import InProgressCardComponent from "./InProgressCardComponent";
+import FinishedCardComponent from "./FinishedCardComponent";
 
 function AllCardsComponent() {
   return (
     <>
       {/* card not start */}
-      <section className="flex justify-between items-center gap-x-8">
+      <section className="flex justify-between items-start gap-x-8">
         <section className="w-2/6">
           <h3 className="border-b border-watermelon-red text-watermelon-red  ">
             Not Stated
           </h3>
           <article>
-            <CardTaskComponent />
+            <NotStartedCardComponent />
           </article>
         </section>
         {/* card progress */}
@@ -20,7 +22,7 @@ function AllCardsComponent() {
             In Progress
           </h3>
           <article>
-            <CardTaskComponent />
+            <InProgressCardComponent />
           </article>
         </section>
         {/* card finishe */}
@@ -29,7 +31,7 @@ function AllCardsComponent() {
             Finished
           </h3>
           <article>
-            <CardTaskComponent />
+            <FinishedCardComponent />
           </article>
         </section>
       </section>

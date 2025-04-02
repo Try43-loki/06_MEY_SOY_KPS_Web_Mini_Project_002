@@ -39,9 +39,9 @@ export const authOption = {
   },
 
   // Custom Login page
-  // pages: {
-  //   signIn: "/login",
-  // },
+  pages: {
+    signIn: "/login",
+  },
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };

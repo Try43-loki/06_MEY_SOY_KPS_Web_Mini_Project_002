@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -6,9 +8,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Clock, Ellipsis } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 export default function CardComponent() {
+  const [selectedValue, setSelectedValue] = useState("NOT_STARTED");
+
   return (
     <div className="border border-gray-300 rounded-xl mt-8">
       <div className="p-5">
@@ -29,15 +33,29 @@ export default function CardComponent() {
           </p>
 
           {/* status */}
-          <div className={`rounded-full w-8 h-8 bg-watermelon-red`}></div>
+          <div
+            className={`h-8 w-8 rounded-full ${
+              selectedValue === "NOT_STARTED"
+                ? "bg-watermelon-red "
+                : selectedValue === "FINISHED"
+                ? "bg-persian-green "
+                : "bg-royal-blue"
+            } `}
+          ></div>
         </div>
       </div>
 
       {/* progress */}
       <div className="flex justify-between items-center border-t border-t-gray-300 p-5">
-        <Select>
+        <Select value={selectedValue} onValueChange={setSelectedValue}>
           <SelectTrigger
-            className={`w-36 truncate border-watermelon-red text-watermelon-red`}
+            className={
+              selectedValue === "NOT_STARTED"
+                ? "text-watermelon-red border-watermelon-red"
+                : selectedValue === "FINISHED"
+                ? "text-persian-green border-persian-green"
+                : "text-royal-blue border-royal-blue"
+            }
           >
             <SelectValue placeholder={"NOT_STARTED"} />
           </SelectTrigger>

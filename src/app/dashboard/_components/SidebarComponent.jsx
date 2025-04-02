@@ -3,6 +3,7 @@ import WorkspaceComponent from "./WorkspaceComponent";
 import FavoriteComponent from "./FavoriteComponent";
 import LogoComponent from "../../../components/logoComponent";
 import { LogOut } from "lucide-react";
+import LogoutComponent from "./LogoutComponent";
 
 function SidebarComponent() {
   return (
@@ -15,6 +16,7 @@ function SidebarComponent() {
           <LogOut />
           <span className=" font-semibold ">Logout</span>
         </button>
+        {/* <LogoutComponent /> */}
       </section>
     </>
   );

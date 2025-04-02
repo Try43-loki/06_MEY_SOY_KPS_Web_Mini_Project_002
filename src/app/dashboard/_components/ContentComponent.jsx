@@ -11,9 +11,9 @@ function ContentComponent() {
         <HeaderComponent />
       </section>
       {/* task */}
-      <section className=" px-14 py-10">
+      <section className=" px-14 py-8">
         {/* title workspace */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-4 ">
           <h5 className="text-2xl font-bold">HRD Design</h5>
           <span className="p-2 rounded-md bg-gray-300">
             <StarIcon />
