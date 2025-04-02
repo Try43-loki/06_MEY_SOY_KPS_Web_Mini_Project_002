@@ -7,13 +7,13 @@ import { LogOut } from "lucide-react";
 function SidebarComponent() {
   return (
     <>
-      <section className=" flex flex-col justify-around items-center h-full px-10 ">
+      <section className=" flex flex-col justify-around items-center h-full px-8 ">
         <LogoComponent />
         <WorkspaceComponent />
         <FavoriteComponent />
-        <button className="flex justify-center items-center text-persian-green gap-2  self-start">
+        <button className="flex justify-center items-center text-persian-green gap-2 cursor-pointer  self-start">
           <LogOut />
-          <span className="text-xl font-semibold ">Logout</span>
+          <span className=" font-semibold ">Logout</span>
         </button>
       </section>
     </>

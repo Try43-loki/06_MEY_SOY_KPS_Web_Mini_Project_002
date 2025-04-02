@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import React from "react";
+import registerAction from "@/action/registerAction";
 
 export default function RegisterComponent() {
   const {
@@ -19,7 +20,7 @@ export default function RegisterComponent() {
     resolver: zodResolver(RegisterSchema),
   });
   const handleRegister = (data) => {
-    console.log("Data : ", data);
+    registerAction(data);
     reset();
   };
   return (

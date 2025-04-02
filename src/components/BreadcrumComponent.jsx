@@ -10,16 +10,10 @@ import {
 
 export function BreadcrumbComponent() {
   return (
-    <Breadcrumb>
+    <Breadcrumb className="text-xl text-black">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="" className="text-red-400">
-            Components
-          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

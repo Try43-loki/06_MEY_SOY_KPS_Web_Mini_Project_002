@@ -5,11 +5,15 @@ import { Label } from "@/components/ui/label";
 import { LoginSchema } from "@/lib/zod/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { KeyRound, Mail } from "lucide-react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function LoginComponent() {
+  const router = useRouter();
   const {
     handleSubmit,
     reset,
@@ -18,8 +22,16 @@ export default function LoginComponent() {
   } = useForm({
     resolver: zodResolver(LoginSchema),
   });
-  const handleLogin = (data) => {
-    console.log(data);
+  const handleLogin = async (data) => {
+    const res = await signIn("credentials", {
+      redirect: false,
+      ...data,
+    });
+
+    // After login success we may want to go somewhere
+    if (res?.status == 200) {
+      router.push("/dashboard");
+    }
     reset();
   };
   return (

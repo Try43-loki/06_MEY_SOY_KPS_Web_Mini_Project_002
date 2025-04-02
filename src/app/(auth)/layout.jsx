@@ -1,3 +1,4 @@
+import { Provider } from "@/context/provide";
 import "../globals.css";
 import Logo from "@/components/LogoComponent";
 
@@ -16,7 +17,7 @@ export default function AuthenticationLayout({ children }) {
         <div className="container mx-auto my-12">
           <Logo />
         </div>
-        {children}
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
