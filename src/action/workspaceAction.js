@@ -10,7 +10,7 @@ import { revalidateTag } from "next/cache";
 export const insertWorkspaceAction = async (formData) => {
   try {
     await addWorkspaceService(formData);
-    revalidateTag("workspace");
+    revalidateTag("workspaces");
     return { success: true, message: "Workspace added successfully" };
   } catch (error) {
     return { success: false, message: error.message };
@@ -20,7 +20,7 @@ export const updateFavoriteWorkspaceAction = async (workspaceId, isFav) => {
   console.log(workspaceId, isFav);
   try {
     await updateFavoriteWorkspaceService(workspaceId, isFav);
-    revalidateTag("workspace");
+    revalidateTag("workspaces");
     return { success: true, message: "Workspace updated successfully" };
   } catch (error) {
     return { success: false, message: error.message };
@@ -33,7 +33,7 @@ export const updateWorkspaceNameAction = async (
 ) => {
   try {
     await updateWorkspaceNameService(workspaceId, workspaceNewName);
-    revalidateTag("workspace");
+    revalidateTag("workspaces");
     return { success: true, message: "Workspace updated successfully" };
   } catch (error) {
     return { success: false, message: error.message };

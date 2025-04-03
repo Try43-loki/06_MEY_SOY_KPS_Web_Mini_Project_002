@@ -27,6 +27,9 @@ const addWorkspaceService = async (workspace) => {
       method: "POST",
       body: JSON.stringify(workspace),
       headers: await headerToken(),
+      next: {
+        tags: ["workspaces"], // invalidate the workspaces cach
+      },
     });
     const data = await res.json();
     return data;

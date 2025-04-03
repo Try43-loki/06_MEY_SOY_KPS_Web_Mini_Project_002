@@ -1,12 +1,14 @@
 import CardComponent from "@/components/CardComponent";
 import React from "react";
 
-function InProgressCardComponent() {
+function InProgressCardComponent({ taskInProgress }) {
   return (
     <>
-      <section>
-        <CardComponent />
-      </section>
+      <>
+        {taskInProgress?.map((item) => {
+          return <CardComponent key={item?.taskId} item={item} />;
+        })}
+      </>
     </>
   );
 }

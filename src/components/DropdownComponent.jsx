@@ -13,22 +13,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
-import { AddWorkspaceComponent } from "./AddWorkspaceComponent";
-import { DeleteWorkspaceComponent } from "./DeleteWorkpaceComponent";
-import { UpdateWorkspaceComponent } from "./UpdateWorkspaceComponent";
 
-export function DropdownComponent() {
+import { DeleteDeteleComponent } from "./DeleteTaskComponent";
+import { UpdateTaskComponent } from "./UpdateTaskComponent";
+
+export function DropdownComponent({ taskId, workspaceId }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
+        <button variant="outline">
           {" "}
           <Ellipsis className="cursor-pointer" />
-        </Button>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-fit px-2 py-1 flex justify-evenly items-center ">
-        <UpdateWorkspaceComponent />
-        <DeleteWorkspaceComponent />
+        <UpdateTaskComponent taskId={taskId} workspaceId={workspaceId} />
+        <DeleteDeteleComponent taskId={taskId} workspaceId={workspaceId} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

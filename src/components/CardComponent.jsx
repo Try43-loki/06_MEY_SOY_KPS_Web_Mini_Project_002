@@ -1,5 +1,6 @@
 "use client";
 
+import { updateTaskStatusByIdAction } from "@/action/taskAction";
 import {
   Select,
   SelectContent,
@@ -8,9 +9,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Clock, Ellipsis } from "lucide-react";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import { DropdownComponent } from "./DropdownComponent";
 
 export default function CardComponent({ item }) {
+  const path = usePathname();
+  const workspaceId = path.split("/")[2];
+  const taskId = item.taskId;
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleDateString("en-US", {
@@ -19,14 +25,25 @@ export default function CardComponent({ item }) {
       year: "numeric", // 2025
     });
   };
-  const [selectedValue, setSelectedValue] = useState("");
 
+  const [selectedValue, setSelectedValue] = useState({
+    status: "NOT_STARTED",
+  });
+  const handleChange = (newValue) => {
+    setSelectedValue((prevState) => {
+      return {
+        ...prevState,
+        status: newValue,
+      };
+    });
+    updateTaskStatusByIdAction(item.taskId, workspaceId, newValue);
+  };
   return (
     <div className="border border-gray-300 rounded-xl mt-8">
       <div className="p-5">
         <div className="flex justify-between">
           <h2 className="text-xl font-bold capitalize">{item.taskTitle}</h2>
-          <Ellipsis />
+          <DropdownComponent taskId={taskId} workspaceId={workspaceId} />
         </div>
 
         {/* task detials */}
@@ -57,7 +74,7 @@ export default function CardComponent({ item }) {
 
       {/* progress */}
       <div className="flex justify-between items-center border-t border-t-gray-300 p-5">
-        <Select onValueChange={setSelectedValue}>
+        <Select onValueChange={handleChange} Value={item.status}>
           <SelectTrigger
             className={
               item.status === "NOT_STARTED"

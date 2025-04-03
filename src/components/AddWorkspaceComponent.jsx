@@ -40,7 +40,7 @@ export function AddWorkspaceComponent() {
           <SquarePlus className="text-gray-500" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[300px]">
         <DialogHeader>
           <DialogTitle>Goal</DialogTitle>
           <DialogDescription>Create Workspace</DialogDescription>

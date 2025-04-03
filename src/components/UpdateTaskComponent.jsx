@@ -12,16 +12,17 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ChevronLeft, ChevronRight, PlusSquare } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pencil, PlusSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { SelectTageComponent } from "./SelectTagComponent";
 import { CaledarComponent } from "./CaledarComponent";
 import { insertTaskAction } from "@/action/taskAction";
 import { usePathname } from "next/navigation";
+import { getAllTasksByWorkspaceId } from "@/services/tanks.service";
 
-export function DialogComponent() {
+export function UpdateTaskComponent({ taskId, workspaceId }) {
   const { handleSubmit, reset, register } = useForm({});
-  const workspaceId = usePathname().split("/")[2];
+  // const workspaceId = usePathname().split("/")[2];
   let tag = "";
   let endDate = "";
   const handleTag = (value) => {
@@ -32,20 +33,15 @@ export function DialogComponent() {
   };
   const handdleTask = (data) => {
     const task = { tag, endDate, ...data };
-    insertTaskAction(workspaceId, task);
-
+    console.log(task);
     reset();
   };
   return (
     <Dialog>
-      <DialogTrigger
-        asChild
-        className="bg-blue-600 font-semibold  hover:bg-blue-100 text-white hover:text-royal-blue hover:border-blue-600 "
-      >
-        <Button variant="outline" className=" text-white">
+      <DialogTrigger asChild>
+        <Button className=" text-blue-500 bg-transparent hover:bg-transparent">
           {" "}
-          <PlusSquare className="size-5" />
-          Add Task
+          <Pencil className="size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -54,11 +50,10 @@ export function DialogComponent() {
             {" "}
             <span className="flex justify-start items-center gap-x-2 font-normal">
               {" "}
-              Goal Breakdown <ChevronRight className="size-4" /> Career &
-              Education
+              Update Task
             </span>
           </DialogTitle>
-          <DialogDescription>workspace</DialogDescription>
+          <DialogDescription>Task</DialogDescription>
         </DialogHeader>
         <form
           action=""
@@ -73,6 +68,7 @@ export function DialogComponent() {
               Title
             </Label>
             <Input
+              value={tag}
               id="taskTitle"
               className="col-span-3"
               placeholder="Insert your goal title"
@@ -106,7 +102,7 @@ export function DialogComponent() {
           <DialogFooter>
             <DialogClose asChild>
               <Button type="submit" className="bg-blue-600">
-                Create Task
+                Update Task
               </Button>
             </DialogClose>
           </DialogFooter>

@@ -1,12 +1,12 @@
 import CardComponent from "@/components/CardComponent";
 import React from "react";
 
-function NotStartedCardComponent() {
+function NotStartedCardComponent({ tasksNotStarted }) {
   return (
     <>
-      <section>
-        <CardComponent />
-      </section>
+      {tasksNotStarted?.map((item) => {
+        return <CardComponent key={item?.taskId} item={item} />;
+      })}
     </>
   );
 }
