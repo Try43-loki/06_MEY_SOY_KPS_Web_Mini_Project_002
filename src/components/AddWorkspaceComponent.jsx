@@ -1,5 +1,8 @@
 "use client";
-import { insertWorkspaceAction } from "@/action/workspaceAction";
+import {
+  insertWorkspaceAction,
+  updateWorkspaceNameAction,
+} from "@/action/workspaceAction";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,10 +18,10 @@ import { Label } from "@/components/ui/label";
 import { WorkspaceNameShcema } from "@/lib/zod/WorkspaceSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { SquarePlus } from "lucide-react";
+import { Ellipsis, SquarePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 
-export function AddWorkspaceComponent() {
+export function AddWorkspaceComponent({ operator, workspaceId }) {
   const {
     handleSubmit,
     reset,
@@ -27,8 +30,14 @@ export function AddWorkspaceComponent() {
   } = useForm({
     resolver: zodResolver(WorkspaceNameShcema),
   });
+
+  // Handle the form submission
   const handleName = (data) => {
-    insertWorkspaceAction(data);
+    if (operator === "add") {
+      insertWorkspaceAction(data);
+    } else {
+      updateWorkspaceNameAction(workspaceId, data);
+    }
 
     reset();
   };
@@ -36,20 +45,26 @@ export function AddWorkspaceComponent() {
   return (
     <Dialog>
       <DialogTrigger asChild className="bg-none border-none">
-        <Button variant="outline" className="text-royal-blue">
-          <SquarePlus className="text-gray-500" />
+        <Button className="bg-transparent hover:bg-transparent">
+          {operator === "add" ? (
+            <SquarePlus className="text-gray-500 size-5 " />
+          ) : (
+            <Ellipsis className="text-blue-500 size-5 " />
+          )}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[300px]">
         <DialogHeader>
           <DialogTitle>Goal</DialogTitle>
-          <DialogDescription>Create Workspace</DialogDescription>
+          <DialogDescription>
+            {operator === "add" ? "Create Workspace" : "Update Workspace"}
+          </DialogDescription>
         </DialogHeader>
 
         {/* Form submission with handleSubmit */}
         <form onSubmit={handleSubmit(handleName)}>
           <div>
-            <Label htmlFor="workspaceName" className="text-right mb-2">
+            <Label htmlFor="workspaceName" className="text-right mb-4">
               Workspace name:
             </Label>
             <Input
@@ -66,7 +81,7 @@ export function AddWorkspaceComponent() {
           <DialogFooter className="mt-3">
             <DialogClose asChild>
               <Button type="submit" className="bg-blue-600">
-                Create Workspace
+                {operator === "add" ? "Create Workspace" : "Update Workspace"}
               </Button>
             </DialogClose>
           </DialogFooter>

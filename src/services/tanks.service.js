@@ -4,7 +4,7 @@ import { baseUrl } from "./constants";
 const getAllTasksByWorkspaceId = async (workspaceId) => {
   try {
     const res = await fetch(
-      `${baseUrl}/tasks/workspace/${workspaceId}?pageNo=0&pageSize=10&sortBy=taskId&sortDirection=ASC`,
+      `${baseUrl}/tasks/workspace/${workspaceId}?pageNo=0&pageSize=100&sortBy=taskId&sortDirection=ASC`,
       {
         method: "GET",
         headers: await headerToken(),
@@ -97,3 +97,5 @@ const updateTaskService = async (taskId, workspaceId, taskData) => {
     console.log(err);
   }
 };
+
+export { updateTaskService };

@@ -11,16 +11,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectTageComponent({ onSelectTag }) {
+export function SelectTageComponent({ onSelectTag, tag }) {
+  const [selectedValue, setSelectedValue] = React.useState(tag);
   // State to hold the selected value
 
   // Handle the value change
   const handleSelectChange = (value) => {
+    setSelectedValue(value);
     onSelectTag(value);
   };
 
   return (
-    <Select onValueChange={handleSelectChange}>
+    <Select onValueChange={handleSelectChange} value={selectedValue}>
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a fruit" />
       </SelectTrigger>
@@ -28,10 +30,13 @@ export function SelectTageComponent({ onSelectTag }) {
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
           <SelectItem value="DESIGN">DESIGN</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectItem value="DATABASE">DATABASE</SelectItem>
+          <SelectItem value="FEATURE">FEATURE</SelectItem>
+          <SelectItem value="DOCUMENTATION">DOCUMENTATION</SelectItem>
+          <SelectItem value="MINI_PROJECT">MINI_PROJECT</SelectItem>
+          <SelectItem value="GIT">GIT</SelectItem>
+          <SelectItem value="ASSIGNMENT">ASSIGNMENT</SelectItem>
+          <SelectItem value="HOMEWORK">HOMEWORK</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

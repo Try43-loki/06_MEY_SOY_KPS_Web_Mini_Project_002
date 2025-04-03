@@ -17,7 +17,6 @@ export const insertWorkspaceAction = async (formData) => {
   }
 };
 export const updateFavoriteWorkspaceAction = async (workspaceId, isFav) => {
-  console.log(workspaceId, isFav);
   try {
     await updateFavoriteWorkspaceService(workspaceId, isFav);
     revalidateTag("workspaces");

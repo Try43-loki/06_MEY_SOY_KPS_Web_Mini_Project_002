@@ -3,6 +3,7 @@ import {
   createTaskService,
   deleteTaskService,
   updateStatusTaskByTaskId,
+  updateTaskService,
 } from "@/services/tanks.service";
 import { revalidateTag } from "next/cache";
 
@@ -49,3 +50,21 @@ const deleteTaskAction = async (taskId, workspaceId) => {
 };
 
 export { deleteTaskAction };
+
+const updateTaskAction = async (taskId, workspaceId, formData) => {
+  console.log(taskId, workspaceId, formData);
+  const taskData = {
+    taskTitle: formData?.taskTitle,
+    taskDetails: formData?.taskDetails,
+    tag: formData?.tag,
+    endDate: formData?.endDate,
+  };
+  try {
+    await updateTaskService(taskId, workspaceId, taskData);
+    revalidateTag("tasks");
+    return { success: true, message: "Task updated successfully" };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+};
+export { updateTaskAction };

@@ -16,7 +16,11 @@ function AddFavoriteComponent({ workspaceId, favoriteWorkspace }) {
   };
   return (
     <>
-      <StarIcon fill={favoriteWorkspace ? "yellow" : ""} onClick={handleFav} />
+      <StarIcon
+        className="bg-gray-100"
+        fill={favoriteWorkspace ? "yellow" : ""}
+        onClick={handleFav}
+      />
     </>
   );
 }

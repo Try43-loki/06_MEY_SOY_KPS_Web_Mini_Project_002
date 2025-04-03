@@ -5,10 +5,13 @@ const getAllWorkspacesService = async () => {
   try {
     const header = await headerToken();
     const res = await fetch(
-      `${baseUrl}/workspaces?pageNo=${0}&pageSize=${10}&sortBy=workspaceId&sortDirection=ASC`,
+      `${baseUrl}/workspaces?pageNo=0&pageSize=100&sortBy=workspaceId&sortDirection=ASC`,
       {
         method: "GET",
         headers: header,
+        next: {
+          tags: ["workspaces"],
+        },
       }
     );
 
@@ -27,11 +30,9 @@ const addWorkspaceService = async (workspace) => {
       method: "POST",
       body: JSON.stringify(workspace),
       headers: await headerToken(),
-      next: {
-        tags: ["workspaces"], // invalidate the workspaces cach
-      },
     });
     const data = await res.json();
+    console.log("dara : ", data);
     return data;
   } catch (err) {
     console.log(err);
@@ -68,10 +69,7 @@ const updateWorkspaceNameService = async (workspaceId, workspaceNewName) => {
     const res = await fetch(`${baseUrl}/workspace/${workspaceId}`, {
       method: "PUT",
       headers: await headerToken(),
-      body: JSON.stringify({
-        workspaceId,
-        workspaceName: workspaceNewName,
-      }),
+      body: JSON.stringify(workspaceNewName),
     });
 
     const data = await res.json();

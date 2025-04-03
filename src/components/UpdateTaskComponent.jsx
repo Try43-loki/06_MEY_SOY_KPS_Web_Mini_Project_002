@@ -12,28 +12,37 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ChevronLeft, ChevronRight, Pencil, PlusSquare } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { SelectTageComponent } from "./SelectTagComponent";
 import { CaledarComponent } from "./CaledarComponent";
-import { insertTaskAction } from "@/action/taskAction";
-import { usePathname } from "next/navigation";
-import { getAllTasksByWorkspaceId } from "@/services/tanks.service";
+import { updateTaskAction } from "@/action/taskAction";
+import { useState } from "react";
 
-export function UpdateTaskComponent({ taskId, workspaceId }) {
+export function UpdateTaskComponent({ taskId, workspaceId, item }) {
   const { handleSubmit, reset, register } = useForm({});
+  const [taskTitle, setTaskTitle] = useState(item?.taskTitle);
+  const [taskDetails, setTaskDetails] = useState(item?.taskDetails);
   // const workspaceId = usePathname().split("/")[2];
-  let tag = "";
-  let endDate = "";
+  let tag = item?.tag;
+  let endDate = item?.endDate;
+  let oldDate = formatDate(item?.endDate);
   const handleTag = (value) => {
     tag = value;
   };
+  function formatDate(endDate) {
+    let date = new Date(endDate);
+    let indochinaTime = new Date(
+      date.toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+    );
+    return indochinaTime.toDateString();
+  }
   const handleData = (value) => {
     endDate = value.toISOString();
   };
   const handdleTask = (data) => {
     const task = { tag, endDate, ...data };
-    console.log(task);
+    updateTaskAction(taskId, workspaceId, task);
     reset();
   };
   return (
@@ -68,7 +77,8 @@ export function UpdateTaskComponent({ taskId, workspaceId }) {
               Title
             </Label>
             <Input
-              value={tag}
+              value={taskTitle}
+              onInput={(e) => setTaskTitle(e.target.value)}
               id="taskTitle"
               className="col-span-3"
               placeholder="Insert your goal title"
@@ -79,20 +89,22 @@ export function UpdateTaskComponent({ taskId, workspaceId }) {
             <Label htmlFor="name" className="text-right  mb-2">
               Tag
             </Label>
-            <SelectTageComponent onSelectTag={handleTag} />
+            <SelectTageComponent onSelectTag={handleTag} tag={tag} />
           </div>
           <div>
             <Label htmlFor="name" className="text-right mb-2 ">
               Due
             </Label>
             {/* <Input id="title" className="col-span-3" placeholder="March 4,2024" /> */}
-            <CaledarComponent onEndDate={handleData} />
+            <CaledarComponent onEndDate={handleData} oldDate={oldDate} />
           </div>
           <div className="w-full">
             <Label htmlFor="name" className="text-right  mb-2">
               Descripton
             </Label>
             <Input
+              value={taskDetails}
+              onInput={(e) => setTaskDetails(e.target.value)}
               id="taskDetails"
               className="col-span-3"
               placeholder="Insert your notes here"

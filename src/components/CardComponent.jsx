@@ -43,7 +43,11 @@ export default function CardComponent({ item }) {
       <div className="p-5">
         <div className="flex justify-between">
           <h2 className="text-xl font-bold capitalize">{item.taskTitle}</h2>
-          <DropdownComponent taskId={taskId} workspaceId={workspaceId} />
+          <DropdownComponent
+            taskId={taskId}
+            workspaceId={workspaceId}
+            item={item}
+          />
         </div>
 
         {/* task detials */}

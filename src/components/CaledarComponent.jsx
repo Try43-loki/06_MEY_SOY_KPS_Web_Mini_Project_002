@@ -14,8 +14,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function CaledarComponent({ onEndDate }) {
-  const [date, setDate] = useState(null);
+export function CaledarComponent({ onEndDate, oldDate }) {
+  const [date, setDate] = useState(oldDate);
   const handleDateChange = (date) => {
     onEndDate(date);
     setDate(date);
@@ -37,6 +37,7 @@ export function CaledarComponent({ onEndDate }) {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
+          // value={}
           mode="single"
           selected={date}
           onSelect={handleDateChange}

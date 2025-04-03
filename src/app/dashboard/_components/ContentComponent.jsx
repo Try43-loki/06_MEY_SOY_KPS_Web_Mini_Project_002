@@ -20,7 +20,7 @@ async function ContentComponent({ workspaceId }) {
         <HeaderComponent workspaceId={workspaceId} />
       </section>
       {/* task */}
-      <section className=" px-14 py-8">
+      <section className=" px-14 py-5">
         {/* title workspace */}
         <div className="flex justify-between items-center mb-4 ">
           <h5 className="text-2xl font-bold">

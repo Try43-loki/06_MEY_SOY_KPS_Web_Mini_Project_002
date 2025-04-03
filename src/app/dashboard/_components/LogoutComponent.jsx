@@ -3,10 +3,9 @@ import { LogOutIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
 import React from "react";
 
-const LogoutComponent = async () => {
-  const handleLogOut = async () => {
-    await signOut({
-      redirect: false,
+const LogoutComponent = () => {
+  const handleLogOut = () => {
+    signOut({
       pages: {
         signIn: "/login",
       },
