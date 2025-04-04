@@ -32,7 +32,6 @@ const addWorkspaceService = async (workspace) => {
       headers: await headerToken(),
     });
     const data = await res.json();
-    console.log("dara : ", data);
     return data;
   } catch (err) {
     console.log(err);

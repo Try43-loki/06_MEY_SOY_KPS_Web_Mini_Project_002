@@ -13,7 +13,7 @@ async function SidebarComponent() {
 
   return (
     <>
-      <section className=" flex flex-col justify-center gap-y-10 items-center h-full px-8 ">
+      <section className=" flex flex-col justify-center gap-y-14 items-center h-full px-8 ">
         <LogoComponent />
         <WorkspaceComponent workspaceData={workspaceData} />
         <FavoriteComponent favoriteWorkspace={favoriteWorkspace} />

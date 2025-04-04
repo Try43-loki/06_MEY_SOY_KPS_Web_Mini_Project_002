@@ -16,6 +16,7 @@ import {
 
 export function CaledarComponent({ onEndDate, oldDate }) {
   const [date, setDate] = useState(oldDate);
+
   const handleDateChange = (date) => {
     onEndDate(date);
     setDate(date);
@@ -37,11 +38,12 @@ export function CaledarComponent({ onEndDate, oldDate }) {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
-          // value={}
           mode="single"
           selected={date}
           onSelect={handleDateChange}
           initialFocus
+          minDate={new Date()}
+          d
         />
       </PopoverContent>
     </Popover>

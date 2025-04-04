@@ -22,7 +22,7 @@ export const updateFavoriteWorkspaceAction = async (workspaceId, isFav) => {
   try {
     await updateFavoriteWorkspaceService(workspaceId, isFav);
     revalidateTag("workspaces");
-    return { success: true, message: "Workspace updated successfully" };
+    return { success: true, message: "Workspace status successfully" };
   } catch (error) {
     return { success: false, message: error.message };
   }

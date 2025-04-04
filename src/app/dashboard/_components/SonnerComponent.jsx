@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 
-export function SonnerDemo() {
+export function SonnerComponent() {
   return (
     <Button
       variant="outline"

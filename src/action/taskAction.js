@@ -30,7 +30,6 @@ const insertTaskAction = async (workspaceId, formData) => {
     tag: formData?.tag,
     endDate: formData?.endDate,
   };
-  console.log(workspaceId, taskData);
 
   try {
     await createTaskService(workspaceId, taskData);

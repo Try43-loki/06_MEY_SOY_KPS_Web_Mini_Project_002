@@ -3,6 +3,7 @@ import NotStartedCardComponent from "./NotStartedCardComponent";
 import InProgressCardComponent from "./InProgressCardComponent";
 import FinishedCardComponent from "./FinishedCardComponent";
 import { getAllTasksByWorkspaceId } from "@/services/tanks.service";
+import InterfaceCompoment from "./InterfaceCompoment";
 
 async function AllCardsComponent({ workspaceId }) {
   const taskData = await getAllTasksByWorkspaceId(workspaceId);
@@ -20,7 +21,6 @@ async function AllCardsComponent({ workspaceId }) {
 
   return (
     <>
-      {/* card not start */}
       <section className="flex justify-between items-start gap-x-8">
         <section className="w-2/6">
           <h3 className="border-b border-watermelon-red text-watermelon-red  ">
@@ -49,6 +49,8 @@ async function AllCardsComponent({ workspaceId }) {
           </article>
         </section>
       </section>
+
+      {/* card not start */}
     </>
   );
 }

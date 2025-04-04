@@ -18,6 +18,7 @@ import { SelectTageComponent } from "./SelectTagComponent";
 import { CaledarComponent } from "./CaledarComponent";
 import { updateTaskAction } from "@/action/taskAction";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function UpdateTaskComponent({ taskId, workspaceId, item }) {
   const { handleSubmit, reset, register } = useForm({});
@@ -48,9 +49,16 @@ export function UpdateTaskComponent({ taskId, workspaceId, item }) {
   };
 
   // handle task
-  const handleTask = (data) => {
+  const handleTask = async (data) => {
     const task = { tag, endDate, ...data };
-    updateTaskAction(taskId, workspaceId, task);
+    const update = await updateTaskAction(taskId, workspaceId, task);
+    toast("Notification", {
+      description: update.message,
+      style: {
+        background: "#f1c40f",
+        color: "#ffffff",
+      },
+    });
     reset();
   };
   return (

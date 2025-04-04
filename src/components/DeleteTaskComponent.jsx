@@ -1,7 +1,10 @@
 "use client";
 import { deleteTaskAction } from "@/action/taskAction";
 import { insertWorkspaceAction } from "@/action/workspaceAction";
-import { SonnerDemo } from "@/app/dashboard/_components/SonnerComponent";
+import {
+  SonnerComponent,
+  SonnerDemo,
+} from "@/app/dashboard/_components/SonnerComponent";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,12 +15,19 @@ import {
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
-
+import { toast } from "sonner";
 import { SquareMinus } from "lucide-react";
 
 export function DeleteDeteleComponent({ taskId, workspaceId }) {
-  const handleDeleteTask = () => {
-    deleteTaskAction(taskId, workspaceId);
+  const handleDeleteTask = async () => {
+    const deleteTask = await deleteTaskAction(taskId, workspaceId);
+    toast("Notification", {
+      description: deleteTask.message,
+      style: {
+        background: "#4CAF50",
+        color: "#ffffff",
+      },
+    });
   };
   return (
     <Dialog>

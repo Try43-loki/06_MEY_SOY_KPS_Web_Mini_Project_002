@@ -18,9 +18,21 @@ import { SelectTageComponent } from "./SelectTagComponent";
 import { CaledarComponent } from "./CaledarComponent";
 import { insertTaskAction } from "@/action/taskAction";
 import { usePathname } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TaskSchema } from "@/lib/zod/TaskSchema";
+import { toast } from "sonner";
+import { set } from "date-fns";
 
 export function DialogComponent() {
-  const { handleSubmit, reset, register } = useForm({});
+  const {
+    handleSubmit,
+    reset,
+    register,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(TaskSchema),
+  });
   const workspaceId = usePathname().split("/")[2];
   let tag = "";
   let endDate = "";
@@ -30,9 +42,18 @@ export function DialogComponent() {
   const handleData = (value) => {
     endDate = value.toISOString();
   };
-  const handdleTask = (data) => {
+
+  const handdleTask = async (data) => {
     const task = { tag, endDate, ...data };
-    insertTaskAction(workspaceId, task);
+    const addTask = await insertTaskAction(workspaceId, task);
+    console.log(addTask);
+    toast("Notification", {
+      description: addTask.message,
+      style: {
+        background: "#2ecc71",
+        color: "#ffffff",
+      },
+    });
 
     reset();
   };
@@ -78,12 +99,18 @@ export function DialogComponent() {
               placeholder="Insert your goal title"
               {...register("taskTitle")}
             />
+            <span className="text-red-500 text-sm mt-4">
+              {errors?.taskTitle?.message}
+            </span>
           </div>
           <div className="w-full">
             <Label htmlFor="name" className="text-right  mb-2">
               Tag
             </Label>
             <SelectTageComponent onSelectTag={handleTag} />
+            {/* <span className="text-red-500 text-sm mt-4">
+              {errors?.tag?.message}
+            </span> */}
           </div>
           <div>
             <Label htmlFor="name" className="text-right mb-2 ">
@@ -102,13 +129,14 @@ export function DialogComponent() {
               placeholder="Insert your notes here"
               {...register("taskDetails")}
             />
+            <span className="text-red-500 text-sm mt-4">
+              {errors?.taskDetails?.message}
+            </span>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit" className="bg-blue-600">
-                Create Task
-              </Button>
-            </DialogClose>
+            <Button type="submit" className="bg-blue-600">
+              Create Task
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

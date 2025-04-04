@@ -12,6 +12,7 @@ import { Clock, Ellipsis } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { DropdownComponent } from "./DropdownComponent";
+import { toast } from "sonner";
 
 export default function CardComponent({ item }) {
   const path = usePathname();
@@ -29,14 +30,26 @@ export default function CardComponent({ item }) {
   const [selectedValue, setSelectedValue] = useState({
     status: "NOT_STARTED",
   });
-  const handleChange = (newValue) => {
+  const handleChange = async (newValue) => {
     setSelectedValue((prevState) => {
       return {
         ...prevState,
         status: newValue,
       };
     });
-    updateTaskStatusByIdAction(item.taskId, workspaceId, newValue);
+
+    const updateStatus = await updateTaskStatusByIdAction(
+      item.taskId,
+      workspaceId,
+      newValue
+    );
+    toast("Notification", {
+      description: updateStatus.message,
+      style: {
+        background: "#4CAF50",
+        color: "#ffffff",
+      },
+    });
   };
   return (
     <div className="border border-gray-300 rounded-xl mt-8">

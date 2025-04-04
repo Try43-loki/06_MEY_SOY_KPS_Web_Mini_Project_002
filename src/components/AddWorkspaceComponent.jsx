@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Ellipsis, SquarePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function AddWorkspaceComponent({ operator, workspaceId }) {
   const {
@@ -31,18 +32,31 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
     resolver: zodResolver(WorkspaceNameShcema),
   });
 
-  const handleName = (data) => {
+  const handleName = async (data) => {
     if (operator === "add") {
-      insertWorkspaceAction(data);
+      const insert = await insertWorkspaceAction(data);
+      toast("Notification", {
+        description: insert.message,
+        style: {
+          background: "#4CAF50",
+          color: "#ffffff",
+        },
+      });
     } else {
-      updateWorkspaceNameAction(workspaceId, data);
+      const update = await updateWorkspaceNameAction(workspaceId, data);
+      toast("Notification", {
+        description: update.message,
+        style: {
+          background: "#f1c40f",
+          color: "#ffffff",
+        },
+      });
     }
 
     reset();
   };
 
   return (
-    // Icon
     <Dialog>
       <DialogTrigger asChild className="bg-none border-none">
         <Button className="bg-transparent hover:bg-transparent">
@@ -70,7 +84,7 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
               id="workspaceName"
               className="col-span-3"
               placeholder="Insert your workspace name"
-              {...register("workspaceName")} // Register the input field
+              {...register("workspaceName")}
             />
           </div>
           <span className="text-red-500 text-sm mt-4">
@@ -78,11 +92,9 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
           </span>
 
           <DialogFooter className="mt-3">
-            <DialogClose asChild>
-              <Button type="submit" className="bg-blue-600">
-                {operator === "add" ? "Create Workspace" : "Update Workspace"}
-              </Button>
-            </DialogClose>
+            <Button type="submit" className="bg-blue-600">
+              {operator === "add" ? "Create Workspace" : "Update Workspace"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

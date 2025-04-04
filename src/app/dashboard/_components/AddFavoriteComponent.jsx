@@ -2,16 +2,32 @@
 import { updateFavoriteWorkspaceAction } from "@/action/workspaceAction";
 import { StarIcon } from "lucide-react";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 function AddFavoriteComponent({ workspaceId, favoriteWorkspace }) {
   const [favorite, setFavorite] = useState(false);
-  const handleFav = () => {
+  const handleFav = async () => {
     setFavorite(!favorite);
-    console.log(favorite);
     if (favorite && favoriteWorkspace) {
-      updateFavoriteWorkspaceAction(workspaceId, false);
+      const update = await updateFavoriteWorkspaceAction(workspaceId, false);
+      toast("Notification", {
+        success: true,
+        description: update.message,
+        className: "bg-green-500",
+        style: {
+          background: "#9b59b6",
+          color: "#000000",
+        },
+      });
     } else {
-      updateFavoriteWorkspaceAction(workspaceId, true);
+      const update = await updateFavoriteWorkspaceAction(workspaceId, true);
+      toast("Notification", {
+        description: update.message,
+        style: {
+          background: "#9b59b6",
+          color: "#000000",
+        },
+      });
     }
   };
   return (

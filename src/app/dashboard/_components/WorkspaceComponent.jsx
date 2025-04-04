@@ -2,7 +2,7 @@
 import { AddWorkspaceComponent } from "@/components/AddWorkspaceComponent";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function WorkspaceComponent({ workspaceData }) {
   const path = usePathname();
@@ -33,8 +33,16 @@ function WorkspaceComponent({ workspaceData }) {
     "#1ABC9C",
   ];
 
-  const getRandomColor = () =>
-    colors[Math.floor(Math.random() * colors.length)];
+  const [colorMap, setColorMap] = useState({});
+
+  useEffect(() => {
+    const newColorMap = {};
+    payload.forEach((item) => {
+      newColorMap[item.workspaceId] =
+        colors[Math.floor(Math.random() * colors.length)];
+    });
+    setColorMap(newColorMap);
+  }, [payload]);
 
   return (
     <section className="h-[240px] w-full">
@@ -43,35 +51,33 @@ function WorkspaceComponent({ workspaceData }) {
         <AddWorkspaceComponent operator={"add"} />
       </div>
       <ul className="mt-2 h-[170px] overflow-y-scroll list-none flex flex-col items-start justify-start">
-        {payload.map((item) => {
-          const randomColor = getRandomColor();
-
-          return (
-            <li
-              key={item.workspaceId}
-              className="w-full flex justify-center items-center mt-1"
-            >
-              <span
-                style={{ backgroundColor: randomColor }}
-                className="mr-3 ml-1 w-2 h-2 rounded-full"
-              ></span>
-              <div className="grow flex justify-between items-center">
-                <Link href={`/dashboard/${item.workspaceId}`}>
-                  <span
-                    className={`text-lg ${
-                      pathId === item.workspaceId
-                        ? "font-semibold"
-                        : "font-normal"
-                    }`}
-                  >
-                    {item.workspaceName}
-                  </span>
-                </Link>
-                <AddWorkspaceComponent workspaceId={item.workspaceId} />
-              </div>
-            </li>
-          );
-        })}
+        {payload.map((item) => (
+          <li
+            key={item.workspaceId}
+            className="w-full flex justify-center items-center mt-1"
+          >
+            <span
+              style={{
+                backgroundColor: colorMap[item.workspaceId] || "#F1D2D6",
+              }}
+              className="mr-3 ml-1 w-2 h-2 rounded-full"
+            ></span>
+            <div className="grow flex justify-between items-center">
+              <Link href={`/dashboard/${item.workspaceId}`}>
+                <span
+                  className={`text-lg ${
+                    pathId === item.workspaceId
+                      ? "font-semibold"
+                      : "font-normal"
+                  }`}
+                >
+                  {item.workspaceName}
+                </span>
+              </Link>
+              <AddWorkspaceComponent workspaceId={item.workspaceId} />
+            </div>
+          </li>
+        ))}
       </ul>
     </section>
   );
