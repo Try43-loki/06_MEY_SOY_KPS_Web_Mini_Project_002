@@ -7,6 +7,8 @@ import {
 } from "@/services/workspace.service";
 import { revalidateTag } from "next/cache";
 
+// insert workspace
+
 export const insertWorkspaceAction = async (formData) => {
   try {
     await addWorkspaceService(formData);
@@ -25,6 +27,8 @@ export const updateFavoriteWorkspaceAction = async (workspaceId, isFav) => {
     return { success: false, message: error.message };
   }
 };
+
+// update workspace
 
 export const updateWorkspaceNameAction = async (
   workspaceId,

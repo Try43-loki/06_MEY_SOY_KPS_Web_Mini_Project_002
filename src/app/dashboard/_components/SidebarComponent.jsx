@@ -2,7 +2,6 @@ import React from "react";
 import WorkspaceComponent from "./WorkspaceComponent";
 import FavoriteComponent from "./FavoriteComponent";
 import LogoComponent from "../../../components/logoComponent";
-import { LogOut } from "lucide-react";
 import LogoutComponent from "./LogoutComponent";
 import { getAllWorkspacesService } from "@/services/workspace.service";
 

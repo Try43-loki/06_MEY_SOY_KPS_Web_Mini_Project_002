@@ -7,6 +7,8 @@ import {
 } from "@/services/tanks.service";
 import { revalidateTag } from "next/cache";
 
+// upadte task by Id
+
 const updateTaskStatusByIdAction = async (taskId, workspaceId, status) => {
   console.log(taskId, workspaceId, status);
   try {
@@ -18,6 +20,8 @@ const updateTaskStatusByIdAction = async (taskId, workspaceId, status) => {
   }
 };
 export { updateTaskStatusByIdAction };
+
+// insert task
 
 const insertTaskAction = async (workspaceId, formData) => {
   const taskData = {
@@ -39,6 +43,8 @@ const insertTaskAction = async (workspaceId, formData) => {
 
 export { insertTaskAction };
 
+// delete task
+
 const deleteTaskAction = async (taskId, workspaceId) => {
   try {
     await deleteTaskService(taskId, workspaceId);
@@ -50,6 +56,8 @@ const deleteTaskAction = async (taskId, workspaceId) => {
 };
 
 export { deleteTaskAction };
+
+// update task
 
 const updateTaskAction = async (taskId, workspaceId, formData) => {
   console.log(taskId, workspaceId, formData);

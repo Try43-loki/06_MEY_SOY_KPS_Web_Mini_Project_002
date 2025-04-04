@@ -13,9 +13,6 @@ import {
 
 export function SelectTageComponent({ onSelectTag, tag }) {
   const [selectedValue, setSelectedValue] = React.useState(tag);
-  // State to hold the selected value
-
-  // Handle the value change
   const handleSelectChange = (value) => {
     setSelectedValue(value);
     onSelectTag(value);

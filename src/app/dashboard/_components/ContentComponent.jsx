@@ -26,7 +26,7 @@ async function ContentComponent({ workspaceId }) {
           <h5 className="text-2xl font-bold">
             {currentWorkspace?.workspaceName ?? "Workspace"}
           </h5>
-          <span className="p-2 rounded-md bg-gray-300">
+          <span className="p-2 rounded-md bg-gray-100">
             <AddFavoriteComponent
               favoriteWorkspace={favoriteWorkspace}
               workspaceId={workspaceId}

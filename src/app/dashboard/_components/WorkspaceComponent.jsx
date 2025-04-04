@@ -33,7 +33,6 @@ function WorkspaceComponent({ workspaceData }) {
     "#1ABC9C",
   ];
 
-  // Function to get a random color from the colors array
   const getRandomColor = () =>
     colors[Math.floor(Math.random() * colors.length)];
 

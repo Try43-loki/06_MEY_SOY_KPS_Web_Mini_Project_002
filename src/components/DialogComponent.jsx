@@ -89,7 +89,7 @@ export function DialogComponent() {
             <Label htmlFor="name" className="text-right mb-2 ">
               Due
             </Label>
-            {/* <Input id="title" className="col-span-3" placeholder="March 4,2024" /> */}
+
             <CaledarComponent onEndDate={handleData} />
           </div>
           <div className="w-full">

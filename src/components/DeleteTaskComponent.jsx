@@ -1,25 +1,19 @@
 "use client";
 import { deleteTaskAction } from "@/action/taskAction";
 import { insertWorkspaceAction } from "@/action/workspaceAction";
+import { SonnerDemo } from "@/app/dashboard/_components/SonnerComponent";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { WorkspaceNameShcema } from "@/lib/zod/WorkspaceSchema";
-import { deleteTaskService } from "@/services/tanks.service";
-import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Minimize2, SquareMinus, SquarePlus } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { SquareMinus } from "lucide-react";
 
 export function DeleteDeteleComponent({ taskId, workspaceId }) {
   const handleDeleteTask = () => {

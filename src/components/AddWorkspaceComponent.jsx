@@ -31,7 +31,6 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
     resolver: zodResolver(WorkspaceNameShcema),
   });
 
-  // Handle the form submission
   const handleName = (data) => {
     if (operator === "add") {
       insertWorkspaceAction(data);
@@ -43,6 +42,7 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
   };
 
   return (
+    // Icon
     <Dialog>
       <DialogTrigger asChild className="bg-none border-none">
         <Button className="bg-transparent hover:bg-transparent">
@@ -60,8 +60,7 @@ export function AddWorkspaceComponent({ operator, workspaceId }) {
             {operator === "add" ? "Create Workspace" : "Update Workspace"}
           </DialogDescription>
         </DialogHeader>
-
-        {/* Form submission with handleSubmit */}
+        {/* form */}
         <form onSubmit={handleSubmit(handleName)}>
           <div>
             <Label htmlFor="workspaceName" className="text-right mb-4">

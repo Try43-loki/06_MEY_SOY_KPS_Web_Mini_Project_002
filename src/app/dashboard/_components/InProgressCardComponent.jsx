@@ -4,11 +4,9 @@ import React from "react";
 function InProgressCardComponent({ taskInProgress }) {
   return (
     <>
-      <>
-        {taskInProgress?.map((item) => {
-          return <CardComponent key={item?.taskId} item={item} />;
-        })}
-      </>
+      {taskInProgress?.map((item) => {
+        return <CardComponent key={item?.taskId} item={item} />;
+      })}
     </>
   );
 }

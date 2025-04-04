@@ -23,13 +23,16 @@ export function UpdateTaskComponent({ taskId, workspaceId, item }) {
   const { handleSubmit, reset, register } = useForm({});
   const [taskTitle, setTaskTitle] = useState(item?.taskTitle);
   const [taskDetails, setTaskDetails] = useState(item?.taskDetails);
-  // const workspaceId = usePathname().split("/")[2];
+  // defalut value
   let tag = item?.tag;
   let endDate = item?.endDate;
   let oldDate = formatDate(item?.endDate);
+
+  // get data form tag
   const handleTag = (value) => {
     tag = value;
   };
+
   function formatDate(endDate) {
     let date = new Date(endDate);
     let indochinaTime = new Date(
@@ -37,10 +40,15 @@ export function UpdateTaskComponent({ taskId, workspaceId, item }) {
     );
     return indochinaTime.toDateString();
   }
+
+  // get date from date picker
+
   const handleData = (value) => {
     endDate = value.toISOString();
   };
-  const handdleTask = (data) => {
+
+  // handle task
+  const handleTask = (data) => {
     const task = { tag, endDate, ...data };
     updateTaskAction(taskId, workspaceId, task);
     reset();
@@ -66,7 +74,7 @@ export function UpdateTaskComponent({ taskId, workspaceId, item }) {
         </DialogHeader>
         <form
           action=""
-          onSubmit={handleSubmit(handdleTask)}
+          onSubmit={handleSubmit(handleTask)}
           className="flex flex-col items-start justify-start gap-y-7 "
         >
           <div className="w-full">
@@ -95,7 +103,6 @@ export function UpdateTaskComponent({ taskId, workspaceId, item }) {
             <Label htmlFor="name" className="text-right mb-2 ">
               Due
             </Label>
-            {/* <Input id="title" className="col-span-3" placeholder="March 4,2024" /> */}
             <CaledarComponent onEndDate={handleData} oldDate={oldDate} />
           </div>
           <div className="w-full">

@@ -20,9 +20,9 @@ export default function CardComponent({ item }) {
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     return date.toLocaleDateString("en-US", {
-      month: "short", // Apr
-      day: "2-digit", // 04
-      year: "numeric", // 2025
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
     });
   };
 
